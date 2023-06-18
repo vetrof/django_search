@@ -1,0 +1,43 @@
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<div>
+<p></p>
+
+    <form class="form-inline mt-2 mt-md-0" action="{% url 'search' %}" method="get">
+
+        {#выбор категории#}
+        <select name="category" class="form-control mr-sm-2">
+        <option value="">All categories</option>
+        {% for category in cat %}
+            <option value="{{ category.id }}">{{ category.cat }}</option>
+        {% endfor %}
+        </select>
+
+        {#поиск#}
+        <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <input name="min" class="form-control mr-sm-2" type="text" placeholder="Min" aria-label="Search">
+        <input name="max" class="form-control mr-sm-2" type="text" placeholder="Max" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+
+    </form>
+
+</div>
+<p></p>
+
+    Поиск по категории: <a href="/"/> Все категории </a>
+    {% for cat in cat %}
+        <a href="/{{ cat.id }}"> | {{ cat.cat }}</a>
+    {% endfor %}
+
+<p></p>
+
+    {% for i in all_realty %}
+    {{ i.name }} | {{ i.adres }} | {{ i.info }} | {{ i.img }}
+        <p></p>
+    {% endfor %}
+{% endblock %}
